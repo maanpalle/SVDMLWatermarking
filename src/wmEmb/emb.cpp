@@ -167,15 +167,12 @@ int main(int argc, char **argv) {
       attribute.push_back(data[j][i]);
     }
     tuple<double, double> var = calcMeanAndStandardVariance(attribute);
-    if (get<1>(var) < lowest_var) {
+    if (get<1>(var) / get<0>(var) < lowest_var) {
       attribute_lowst_var = attribute;
-      lowest_var = get<1>(var);
+      lowest_var = get<1>(var) / get<0>(var);
       wm_index = i;
     }
   }
-
-  // attribute_lowst_var = {1, 2, 3, 4, 1, 3, 2, 3, 1, 0, 3, 4, 1, 2, 3, 4};
-  // watermark = {0};
 
   // Start the watermarking process of the attribute
   cout << "watermarking attribute with variance: " << lowest_var << endl;
