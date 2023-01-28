@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
 import os
 
 threshold = 0.02
 
-os.system('./../wmSvd/svd 0 ' + str(threshold))
+os.system('./../wmEmb/emb 0 ' + str(threshold) + " 1")
 
 wm_data_file = open("../data/wm.txt", "r")
 data_file = open("../data/iris.txt", "r")
@@ -57,6 +58,9 @@ for line in data_file.readlines():
         data_2_0.append(float(splitted[0]))
         data_2_1.append(float(splitted[1]))
 
+font = {'size' : 18}
+
+matplotlib.rc('font', **font)
 
 fig, ax = plt.subplots(1, 2)
 

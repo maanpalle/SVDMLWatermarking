@@ -42,7 +42,6 @@ def eval(x, y):
     accuracy = metrics.accuracy_score(y_true=ytest, y_pred=prediction)
     return accuracy
 
-thresholds = [1, 0.5, 0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001, 0.00005, 0.00001]
 thresholds = []
 accuracies = []
 
@@ -53,9 +52,9 @@ i = 0
 for threshold in thresholds:
     print(i)
     if dataset == "../data/Dry_Bean.txt":
-        os.system(f"./../wmSvd/svd 0 {threshold} 0")
+        os.system(f"./../wmEmb/emb 0 {threshold} 0")
     else:
-        os.system(f"./../wmSvd/svd 0 {threshold} 1")
+        os.system(f"./../wmEmb/emb 0 {threshold} 1")
     wm_data = open("../data/wm.txt", "r")
     x, y = parse(wm_data)
     accuracies.append(eval(x, y))
@@ -63,12 +62,11 @@ for threshold in thresholds:
 
 host_data = open(dataset, "r")
 x, y = parse(host_data)
-print(accuracies)
-print(eval(x, y))
 
+plt.rc('font', size=18)
 plt.scatter(thresholds, accuracies, c = 'red')
 plt.title("BayesClassifier Accuracies")
-plt.xlabel("thresholds")
-plt.ylabel("accuracy")
+plt.xlabel("thresholds", fontsize=18)
+plt.ylabel("accuracy", fontsize=18)
 plt.show()
 

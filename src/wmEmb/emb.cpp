@@ -167,9 +167,9 @@ int main(int argc, char **argv) {
       attribute.push_back(data[j][i]);
     }
     tuple<double, double> var = calcMeanAndStandardVariance(attribute);
-    if (get<1>(var) / get<0>(var) < lowest_var) {
+    if (get<1>(var) < lowest_var) {
       attribute_lowst_var = attribute;
-      lowest_var = get<1>(var) / get<0>(var);
+      lowest_var = get<1>(var);
       wm_index = i;
     }
   }

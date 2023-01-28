@@ -7,8 +7,14 @@ import matplotlib.pyplot as plt
 from sklearn import metrics
 import os
 
-k = 4
-#k = 16
+dataset = ["../data/iris.txt", "../data/Dry_Bean.txt"][1]
+
+if dataset == "../data/Dry_Bean.txt":
+    index = 0
+    k = 16
+else:
+    k = 4
+    index = 1
 
 def parse(file):
     x = []
@@ -39,7 +45,6 @@ def eval(x, y):
 
 
 
-thresholds = [1, 0.5, 0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001, 0.00005, 0.00001]
 thresholds = []
 accuracies = []
 
@@ -49,21 +54,20 @@ for i in range(300):
 i = 0
 for threshold in thresholds:
     print(i)
-    os.system(f"./../wmSvd/svd 0 {threshold} 1")
+    os.system(f"./../wmEmb/emb 0 {threshold} {index}")
     wm_data = open("../data/wm.txt", "r")
     x, y = parse(wm_data)
     accuracies.append(eval(x, y))
     i += 1
 
-host_data = open("../data/iris.txt", "r")
-#host_data = open("../data/Dry_Bean.txt", "r")
+host_data = open(dataset, "r")
 x, y = parse(host_data)
-print(eval(x, y))
 
+plt.rc('font', size=18)
 plt.scatter(thresholds, accuracies, c = 'red')
 plt.title("DescisionTreeClassifier Accuracies")
-plt.xlabel("thresholds")
-plt.ylabel("accuracy")
+plt.xlabel("thresholds", fontsize=18)
+plt.ylabel("accuracy", fontsize=18)
 plt.show()
 
 

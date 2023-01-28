@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
 import os
 
 threshold = 0.002
 
-os.system('./../wmSvd/svd 0 ' + str(threshold))
+os.system('./../wmEmb/emb 0 ' + str(threshold) + '0')
 
 wm_data_file = open("../data/wm.txt", "r")
 data_file = open("../data/Dry_Bean.txt", "r")
@@ -86,7 +87,11 @@ data_4.sort()
 data_5.sort()
 data_6.sort()
 
-s = 3
+font = {'size' : 18} 
+
+matplotlib.rc('font', **font)
+
+s = 5
 
 ax[1].scatter(range(len(wm_data_0)), wm_data_0, c = "red", s=s)
 ax[1].scatter(range(len(wm_data_1)), wm_data_1, c = "blue", s=s)
@@ -97,8 +102,8 @@ ax[1].scatter(range(len(wm_data_5)), wm_data_5, c = "orange", s=s)
 ax[1].scatter(range(len(wm_data_6)), wm_data_6, c = "purple", s=s)
 ax[1].legend(("Seker", "Barbunya", "Bombay", "Cali", "Horoz", "Sira", "Dermason"))
 ax[1].set_title("Watermarked data with threshold = " + str(threshold))
-ax[1].set_xlabel("n")
-ax[1].set_ylabel("ShapeFactor4")
+ax[1].set_xlabel("n", fontsize=18)
+ax[1].set_ylabel("ShapeFactor4", fontsize=18)
 
 ax[0].scatter(range(len(data_0)), data_0, c = "red", s=s)
 ax[0].scatter(range(len(data_1)), data_1, c = "blue", s=s)
@@ -109,8 +114,8 @@ ax[0].scatter(range(len(data_5)), data_5, c = "orange", s=s)
 ax[0].scatter(range(len(data_6)), data_6, c = "purple", s=s)
 ax[0].legend(("Seker", "Barbunya", "Bombay", "Cali", "Horoz", "Sira", "Dermason"))
 ax[0].set_title("Host data")
-ax[0].set_xlabel("n")
-ax[0].set_ylabel("ShapeFactor4")
+ax[0].set_xlabel("n", fontsize=18)
+ax[0].set_ylabel("ShapeFactor4", fontsize=18)
 
 
 

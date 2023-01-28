@@ -11,12 +11,15 @@ dataset = ["../data/Dry_Bean.txt", "../data/iris.txt"][0]
 
 k = 0
 dim = 0
+watermarked = 0
 if(dataset == "../data/Dry_Bean.txt"):
     k = 7
     dim = 16
+    watermarked = 15
 else:
     k = 3
     dim = 4
+    watermarked = 1
 
 
 
@@ -45,16 +48,15 @@ def get_original_centroids(x, y):
 
     centroids = model.fit(x).cluster_centers_
 
-    return centroids[:, 15]
+    return centroids[:, watermarked]
 
 def eval(x, y):
     model = KMeans(n_clusters=k, random_state=0, n_init="auto")
 
     centroids = model.fit(x).cluster_centers_
 
-    return centroids[:, 15]
+    return centroids[:, watermarked]
 
-thresholds = [1, 0.5, 0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001, 0.00005, 0.00001]
 thresholds = []
 errors = []
 
@@ -69,17 +71,18 @@ i = 0
 for threshold in thresholds:
     print(i)
     if dataset == "../data/Dry_Bean.txt":
-        os.system(f"./../wmSvd/svd 0 {threshold} 0")
+        os.system(f"./../wmEmb/emb 0 {threshold} 0")
     else:
-        os.system(f"./../wmSvd/svd 0 {threshold} 1")
+        os.system(f"./../wmEmb/emb 0 {threshold} 1")
     wm_data = open("../data/wm.txt", "r")
     x, y = parse(wm_data)
     errors.append(get_distance(eval(x, y), host_centroids))
     i += 1
 
+plt.rc('font', size=18)
 plt.scatter(thresholds, errors, c='red')
 plt.title("KMeans centroids Euclidian distance")
-plt.xlabel("thresholds")
-plt.ylabel("Errors")
+plt.xlabel("thresholds", fontsize=18)
+plt.ylabel("Errors", fontsize=18)
 plt.show()
 
