@@ -1,2 +1,4 @@
 __pycache__/
 .vscode/
+src/data/wm.txt
+src/data/wm_image.txt
