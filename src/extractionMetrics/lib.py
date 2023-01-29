@@ -43,7 +43,7 @@ def extract_wm(max, wm_index):
 
 # dataset is a number [0, 1] 0 referring to the dry-bean dataset 1 to the iris one.
 def watermark_data(dataset, threshold):
-    os.system(f"./../wmSvd 0 {threshold} {dataset}")
+    os.system(f"./../wmEmb/emb 0 {threshold} {dataset}")
 
     return parse_data(open("../data/wm.txt"))
 

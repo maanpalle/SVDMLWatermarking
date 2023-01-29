@@ -29,7 +29,7 @@ watermarks = []
 
 for percentage in percentages:
     print(percentage)
-    os.system(f'./../wmSvd/svd 0 0.05, {dataset}')
+    os.system(f'./../wmEmb/emb 0 0.05, {dataset}')
     x = parse_data(open("../data/wm.txt", "r"))
     y = attack(x, percentage)
     write_data(y)
